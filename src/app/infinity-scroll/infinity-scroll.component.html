@@ -1,3 +1,41 @@
-<p>
-  infinity-scroll works!
-</p>
+<router-outlet></router-outlet>
+<div>
+  <mat-tab-group class="materials-tab-group" [disableRipple]="true">
+    <mat-tab label="New"></mat-tab>
+    <mat-tab label="Scanning"></mat-tab>
+    <mat-tab label="Image Processing"></mat-tab>
+    <mat-tab label="Shading"></mat-tab>
+    <mat-tab label="Completed"></mat-tab>
+  </mat-tab-group>
+</div>
+<div [ngClass]="{'custom-background':true}" style="padding: 10px 20px 10px 20px">
+  <mat-grid-list cols="4" rowHeight="3:4" gutterSize="20px" data-infinite-scroll
+                 [infiniteScrollDistance]="scrollDistance"
+                 [infiniteScrollThrottle]="throttle"
+                 (scrolled)="onScrollDown()">
+    <mat-grid-tile *ngFor="let material of materialList">
+      <mat-card [routerLink]="[material.id]">
+        <mat-card-content>
+          <div class="container">
+            <img mat-card-image [src]="material.gallery_image">
+            <div class="text-block">
+              {{material.id}}
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="left">
+            <div class="square" *ngFor="let tag of material.tags">{{tag}}</div>
+          </div>
+          <br>
+          <div fxLayout="row" fxLayoutAlign="center">
+            <p>{{material.name}}</p>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <div fxLayout="row" fxLayoutAlign="center" style="padding-top: 10px">
+    <mat-progress-spinner *ngIf="showLoadingSpinner" color="primary" mode="indeterminate" [diameter]="30"
+                          [strokeWidth]="16">
+    </mat-progress-spinner>
+  </div>
+</div>

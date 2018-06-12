@@ -1,3 +1,115 @@
-<p>
-  material-modal works!
-</p>
+<div id="modal" class="modal" (click)="onCloseDialog()">
+  <div class="modal-inner">
+    <mat-card *ngIf="material">
+      <mat-card-header style="margin-top: -24px">
+        <mat-card-title><h2>{{material.name}}</h2></mat-card-title>
+      </mat-card-header>
+      <mat-card-content fxLayout="row">
+        <div fxLayout="column">
+          <mat-form-field>
+            <mat-chip-list #tagList>
+              <mat-chip *ngFor="let tag of material.tags" [selectable]="true"
+                        [removable]="true" (removed)="removeTag(tag,material)">
+                {{tag}}
+                <mat-icon matChipRemove>cancel</mat-icon>
+              </mat-chip>
+              <input [matChipInputFor]="tagList"
+                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                     [matChipInputAddOnBlur]="true"
+                     (matChipInputTokenEnd)="addTag($event,material)"/>
+            </mat-chip-list>
+          </mat-form-field>
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            <label style="padding-right: 10px"><b>Customer:</b></label>
+            <mat-form-field>
+              <mat-select>
+                <mat-option *ngFor="let customer of material.customers" [value]="customer.value">
+                  {{ customer.value }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            <label style="padding-right: 10px"><b>Article ID:</b></label>
+            <mat-form-field>
+              <input matInput placeholder="(article ID)" [value]=material.article_id>
+            </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            <label><b>State:</b></label>
+            <mat-form-field>
+              <mat-select>
+                <mat-option *ngFor="let state of material.states" [value]="state.value">
+                  {{ state.value }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            <label style="padding-right: 2px"><b>Work State:</b></label>
+            <mat-form-field>
+              <mat-select>
+                <mat-option *ngFor="let work_state of material.work_states" [value]="work_state.value">
+                  {{ work_state.value }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            <label style="padding-right: 2px"><b>Special Requests:</b></label>
+            <mat-form-field>
+              <textarea matInput placeholder="(special requests)" [value]=material.special_requests></textarea>
+            </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            <label style="padding-right: 2px"><b>Comments:</b></label>
+            <mat-form-field>
+              <textarea matInput placeholder="(comments)" [value]=material.comments></textarea>
+            </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            <label style="padding-right: 2px"><b>File 1:</b></label>
+            <mat-form-field>
+              <input matInput placeholder="(attachment)" value='File 1'>
+            </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            <label style="padding-right: 2px"><b>File 2:</b></label>
+            <mat-form-field>
+              <input matInput placeholder="(attachment)" value='File 2'>
+            </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            <label style="padding-right: 2px"><b>File 3:</b></label>
+            <mat-form-field>
+              <input matInput placeholder="(attachment)" value='File 3'>
+            </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            <label style="padding-right: 2px"><b>File 4:</b></label>
+            <mat-form-field>
+              <input matInput placeholder="(attachment)" value='File 4'>
+            </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            <label style="padding-right: 2px"><b>File 5:</b></label>
+            <mat-form-field>
+              <input matInput placeholder="(attachment)" value='File 5'>
+            </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            <label style="padding-right: 2px"><b>File 6:</b></label>
+            <mat-form-field>
+              <input matInput placeholder="(attachment)" value='File 6'>
+            </mat-form-field>
+          </div>
+        </div>
+        <span fxFlex="10%"></span>
+        <div>
+          <img mat-card-image [src]="material.gallery_image">
+        </div>
+        <span fxFlex="5%"></span>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
